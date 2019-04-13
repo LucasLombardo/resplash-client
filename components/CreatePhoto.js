@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
+import { Form } from './Form';
 
 const CREATE_PHOTO_MUTATION = gql`
   mutation CREATE_PHOTO_MUTATION(
@@ -42,7 +43,7 @@ class CreatePhoto extends Component {
     return (
       <Mutation mutation={CREATE_PHOTO_MUTATION} variables={this.state}>
         {(createPhoto, { loading, error }) => (
-          <form onSubmit={async (e) => {
+          <Form onSubmit={async (e) => {
             e.preventDefault();
             const res = await createPhoto();
             console.log(res);
@@ -75,7 +76,7 @@ class CreatePhoto extends Component {
 
               <button type="submit">Submit</button>
             </fieldset>
-          </form>
+          </Form>
         )}
       </Mutation>
     );
