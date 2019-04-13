@@ -3,9 +3,9 @@ import { Meta } from './Meta';
 import { Nav } from './Nav';
 
 export const Layout = ({ children }) => (
-    <>
-        <Meta />
-        <header><Nav /></header>
-        <main>{children}</main>
-    </>
+  <>
+    <Meta />
+    <header><Nav /></header>
+    <main>{children}</main>
+  </>
 );
