@@ -26,7 +26,7 @@ const NavItem = styled.a`
 
 export const Nav = () => (
   <NavBar>
-    <Link href="/"><NavItem>Home</NavItem></Link>
-    <Link href="/page-2"><NavItem>Page 2</NavItem></Link>
+    <Link href=""><NavItem>Home</NavItem></Link>
+    <Link href="new-photo"><NavItem>New Photo</NavItem></Link>
   </NavBar>
 );
