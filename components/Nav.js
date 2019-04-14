@@ -28,5 +28,6 @@ export const Nav = () => (
   <NavBar>
     <Link href="/"><NavItem>Home</NavItem></Link>
     <Link href="new-photo"><NavItem>New Photo</NavItem></Link>
+    <Link href="sign-up"><NavItem>Sign Up</NavItem></Link>
   </NavBar>
 );
