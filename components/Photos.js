@@ -3,7 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { PhotoCard } from './PhotoCard';
 
-const ALL_PHOTOS_QUERY = gql`
+export const ALL_PHOTOS_QUERY = gql`
   query ALL_PHOTOS_QUERY {
     photos {
       id
