@@ -2,6 +2,7 @@ import React from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Head from 'next/head';
+import Link from 'next/link';
 
 const SINGLE_PHOTO_QUERY = gql`
   query SINGLE_PHOTO_QUERY($id: ID!) {
@@ -30,6 +31,7 @@ export const ShowPhoto = ({ id }) => (
           <div>
             <h2>Viewing {photo.title}</h2>
             <p>{photo.description}</p>
+            <Link href={{ pathname: `/edit-photo`, query: { id: photo.id } }}><a>Edit</a></Link>
           </div>
         </div>
       );
