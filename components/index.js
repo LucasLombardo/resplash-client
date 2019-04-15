@@ -4,6 +4,7 @@ export * from './Layout';
 export * from './Meta';
 export * from './Nav';
 export * from './Photos';
+export * from './SignIn';
 export * from './SignUp';
 export * from './ShowPhoto';
 export * from './UpdatePhoto';
