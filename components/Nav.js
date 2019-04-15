@@ -34,6 +34,7 @@ export const Nav = () => (
           <p>Welcome, {data.me.name}.</p>
           <Link href="/"><NavItem>Home</NavItem></Link>
           <Link href="new-photo"><NavItem>New Photo</NavItem></Link>
+          <Link href="change-password"><NavItem>Change PW</NavItem></Link>
           <SignOut />
         </>
       ) : (
