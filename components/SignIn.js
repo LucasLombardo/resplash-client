@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
+import Router from 'next/router';
 import { Form } from './Form';
 import { CURRENT_USER_QUERY } from './User';
 
@@ -33,6 +34,9 @@ export const SignIn = () => {
             await signIn();
             setEmail(``);
             setPassword(``);
+            Router.push({
+              pathname: `/`,
+            });
           }}
         >
           <fieldset disabled={loading} aria-busy={loading}>
