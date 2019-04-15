@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from 'next/link';
 import styled from 'styled-components';
+import { User } from './User';
 
 const NavBar = styled.nav`
   display: flex;
@@ -26,6 +27,9 @@ const NavItem = styled.a`
 
 export const Nav = () => (
   <NavBar>
+    <User>
+      {({ data }) => <p>Hello, {data.me.name}</p>}
+    </User>
     <Link href="/"><NavItem>Home</NavItem></Link>
     <Link href="new-photo"><NavItem>New Photo</NavItem></Link>
     <Link href="sign-up"><NavItem>Sign Up</NavItem></Link>
