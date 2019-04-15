@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { Photos } from '../components';
+import { Photos, Container } from '../components';
 
 const PhotoGrid = styled.div`
   display: grid;
@@ -9,12 +9,12 @@ const PhotoGrid = styled.div`
 `;
 
 const Home = () => (
-  <div>
+  <Container>
     <h2>All Photos</h2>
     <PhotoGrid>
       <Photos />
     </PhotoGrid>
-  </div>
+  </Container>
 );
 
 export default Home;

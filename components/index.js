@@ -1,4 +1,5 @@
 export * from './ChangePassword';
+export * from './Container';
 export * from './CreatePhoto';
 export * from './DeletePhoto';
 export * from './Layout';
