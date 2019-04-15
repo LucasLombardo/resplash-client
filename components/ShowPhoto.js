@@ -5,7 +5,7 @@ import Head from 'next/head';
 import Link from 'next/link';
 import { DeletePhoto } from './DeletePhoto';
 
-const SINGLE_PHOTO_QUERY = gql`
+export const SINGLE_PHOTO_QUERY = gql`
   query SINGLE_PHOTO_QUERY($id: ID!) {
     photo(where: { id: $id }) {
       id

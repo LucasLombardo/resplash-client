@@ -3,6 +3,7 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
+import { ALL_PHOTOS_QUERY } from './Photos';
 
 const CREATE_PHOTO_MUTATION = gql`
   mutation CREATE_PHOTO_MUTATION(
@@ -63,12 +64,15 @@ class CreatePhoto extends Component {
     const { title, price, description, photographer, photographerLink, thumbnail } = this.state;
 
     return (
-      <Mutation mutation={CREATE_PHOTO_MUTATION} variables={this.state}>
+      <Mutation
+        mutation={CREATE_PHOTO_MUTATION}
+        variables={this.state}
+        refetchQueries={[{ query: ALL_PHOTOS_QUERY }]}
+      >
         {(createPhoto, { loading, error }) => (
           <Form onSubmit={async (e) => {
             e.preventDefault();
             const res = await createPhoto();
-            console.log(res);
             Router.push({
               pathname: `/`,
             });

@@ -3,6 +3,8 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
+import { SINGLE_PHOTO_QUERY } from './ShowPhoto';
+import { ALL_PHOTOS_QUERY } from './Photos';
 
 const UPDATE_PHOTO_QUERY = gql`
   query UPDATE_PHOTO_QUERY($id: ID!) {
@@ -70,9 +72,7 @@ class UpdatePhoto extends Component {
     return (
       <Query
         query={UPDATE_PHOTO_QUERY}
-        variables={{
-          id,
-        }}
+        variables={{ id }}
       >
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
@@ -80,7 +80,11 @@ class UpdatePhoto extends Component {
           const { title, price, description, photographer, photographerLink } = data.photo;
 
           return (
-            <Mutation mutation={UPDATE_PHOTO_MUTATION} variables={this.state}>
+            <Mutation
+              mutation={UPDATE_PHOTO_MUTATION}
+              variables={this.state}
+              refetchQueries={[{ query: ALL_PHOTOS_QUERY }, { query: SINGLE_PHOTO_QUERY }]}
+            >
               {(updatePhoto, { loading, error }) => (
                 <Form onSubmit={e => this.updatePhoto(e, updatePhoto)}>
                   {error && console.error(error)}
