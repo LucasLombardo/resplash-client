@@ -1,14 +1,14 @@
-import React, { Component, useState } from 'react';
+import React, { useState } from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import { Form } from './Form';
 import { CURRENT_USER_QUERY } from './User';
 
 const SIGNIN_MUTATION = gql`
-  mutation SIGNIN_MUTATION {
+  mutation SIGNIN_MUTATION($email: String!, $password: String!) {
     signIn(
-      email: "lucasl@bu.edu"
-      password: "pw"
+      email: $email
+      password: $password
     ) {
       name
     }
