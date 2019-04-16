@@ -41,7 +41,6 @@ class CreatePhoto extends Component {
   };
 
   uploadFile = async (e) => {
-    console.log(`uploading file...`);
     const { files } = e.target;
     if (files.length) {
       const data = new FormData();
