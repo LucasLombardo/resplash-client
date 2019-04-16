@@ -29,12 +29,13 @@ const MessageWrapper = styled.div`
   }
 `;
 
-export const Message = ({ type, children }) => {
+export const Message = ({ type, children, error }) => {
   const [messageClass, setMessageClass] = useState(type);
+  const display = children || error.message.replace(`GraphQL error: `, ``);
 
   return (
     <MessageWrapper className={messageClass}>
-      {children}
+      {display}
       <button
         type="button"
         onClick={() => setMessageClass(`closed`)}

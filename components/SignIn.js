@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
 import { CURRENT_USER_QUERY } from './User';
+import { Message } from './Message';
 
 const SIGNIN_MUTATION = gql`
   mutation SIGNIN_MUTATION($email: String!, $password: String!) {
@@ -41,7 +42,7 @@ export const SignIn = () => {
         >
           <fieldset disabled={loading} aria-busy={loading}>
             <h2>Sign In</h2>
-            {error && console.log(`error`, error)}
+            {error && <Message error={error} />}
             <label htmlFor="email">
               Email
               <input

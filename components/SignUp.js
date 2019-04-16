@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
 import { CURRENT_USER_QUERY } from './User';
+import { Message } from './Message';
 
 const SIGNUP_MUTATION = gql`
   mutation SIGNUP_MUTATION($email: String!, $name: String!, $password: String!) {
@@ -48,7 +49,7 @@ class SignUp extends Component {
           >
             <fieldset disabled={loading} aria-busy={loading}>
               <h2>Sign Up for An Account</h2>
-              {error && console.log(`error`, error)}
+              {error && <Message error={error} />}
               <label htmlFor="email">
                 Email
                 <input

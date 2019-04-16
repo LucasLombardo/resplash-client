@@ -5,6 +5,7 @@ import Router from 'next/router';
 import { Form } from './Form';
 import { SINGLE_PHOTO_QUERY } from './ShowPhoto';
 import { ALL_PHOTOS_QUERY } from './Photos';
+import { Message } from './Message';
 
 const UPDATE_PHOTO_QUERY = gql`
   query UPDATE_PHOTO_QUERY($id: ID!) {
@@ -87,7 +88,7 @@ class UpdatePhoto extends Component {
             >
               {(updatePhoto, { loading, error }) => (
                 <Form onSubmit={e => this.updatePhoto(e, updatePhoto)}>
-                  {error && console.error(error)}
+                  {error && <Message error={error} />}
                   <fieldset disabled={loading} aria-busy={loading}>
                     <label htmlFor="title">Title
                       <input type="text" id="title" name="title" placeholder="Title of Photo" defaultValue={title} onChange={this.handleChange} />

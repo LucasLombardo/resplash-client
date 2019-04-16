@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { User } from './User';
 import { Form } from './Form';
+import { Message } from './Message';
 
 const CHANGE_PASSWORD_MUTATION = gql`
   mutation CHANGE_PASSWORD_MUTATION($email: String!, $password: String!, $newPassword: String!) {
@@ -45,7 +46,7 @@ export const ChangePassword = () => {
               >
                 <fieldset disabled={loading} aria-busy={loading}>
                   <h2>Sign In</h2>
-                  {error && console.log(`error`, error)}
+                  {error && <Message error={error} />}
                   <label htmlFor="password">
                     Password
                     <input

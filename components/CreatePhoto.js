@@ -4,6 +4,7 @@ import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
 import { ALL_PHOTOS_QUERY } from './Photos';
+import { Message } from './Message';
 
 const CREATE_PHOTO_MUTATION = gql`
   mutation CREATE_PHOTO_MUTATION(
@@ -78,7 +79,7 @@ class CreatePhoto extends Component {
             });
           }}
           >
-            {error && console.error(error)}
+            {error && <Message error={error} />}
             <fieldset disabled={loading} aria-busy={loading}>
               <label htmlFor="file">
                 Image
