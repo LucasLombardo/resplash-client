@@ -3,15 +3,19 @@ import Link from 'next/link';
 import styled from 'styled-components';
 import { User } from './User';
 import { SignOut } from './SignOut';
+import { Container } from './Container';
 
 const NavBar = styled.nav`
-  display: flex;
   border-bottom: 1px solid black;
-  justify-content: center;
-`;
-
-const NavItem = styled.a`
-    margin: .8em 2em 1em;
+  .nav-container {
+    display: flex;
+    justify-content: space-between;
+  }
+  a, button {
+    background: none;
+    border: none;
+    display: block;
+    margin: .8em 0.5em 1em;
     padding: 3px;
     border: 1px solid rgba(0,0,0,0);
     color: black;
@@ -24,27 +28,29 @@ const NavItem = styled.a`
     &:hover {
       border: 1px solid black;
     }
+  }
 `;
 
 export const Nav = () => (
   <NavBar>
-    <User>
-      {({ data }) => (data.me ? (
-        <>
-          <p>Welcome, {data.me.name}.</p>
-          <Link href="/"><NavItem>Home</NavItem></Link>
-          <Link href="new-photo"><NavItem>New Photo</NavItem></Link>
-          <Link href="change-password"><NavItem>Change PW</NavItem></Link>
-          <SignOut />
-        </>
-      ) : (
-        <>
-          <Link href="/"><NavItem>Home</NavItem></Link>
-          <Link href="sign-in"><NavItem>Sign In</NavItem></Link>
-          <Link href="sign-up"><NavItem>Sign Up</NavItem></Link>
-        </>
-      ))
-      }
-    </User>
+    <Container className="nav-container">
+      <User>
+        {({ data }) => (data.me ? (
+          <>
+            <Link href="/"><a>Home</a></Link>
+            <Link href="new-photo"><a>New Photo</a></Link>
+            <Link href="change-password"><a>Change PW</a></Link>
+            <SignOut />
+          </>
+        ) : (
+          <>
+            <Link href="/"><a>Home</a></Link>
+            <Link href="sign-in"><a>Sign In</a></Link>
+            <Link href="sign-up"><a>Sign Up</a></Link>
+          </>
+        ))
+        }
+      </User>
+    </Container>
   </NavBar>
 );
