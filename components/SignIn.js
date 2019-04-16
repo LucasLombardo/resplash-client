@@ -64,7 +64,7 @@ export const SignIn = () => {
               />
             </label>
 
-            <button type="submit">Sign Up!</button>
+            <button type="submit">Sign In!</button>
           </fieldset>
         </Form>
       )}

@@ -32,7 +32,7 @@ const CREATE_PHOTO_MUTATION = gql`
 
 class CreatePhoto extends Component {
   // eslint-disable-next-line
-  state = { image: ``, title: ``, price: ``, description: ``, photographer: ``, photographerLink: ``, thumbnail: ``, largeImage: `` }
+  state = { image: ``, uploading: false, title: ``, price: ``, description: ``, photographer: ``, photographerLink: ``, thumbnail: ``, largeImage: `` }
 
   handleChange = (e) => {
     const { name, type, value } = e.target;
@@ -46,14 +46,14 @@ class CreatePhoto extends Component {
       const data = new FormData();
       data.append(`file`, files[0]);
       data.append(`upload_preset`, `resplash`);
-
+      this.setState({ uploading: true });
       const res = await fetch(`https://api.cloudinary.com/v1_1/dov1pamgz/image/upload`, {
         method: `POST`,
         body: data,
       });
       const file = await res.json();
       // eslint-disable-next-line
-      this.setState({ thumbnail: file.secure_url, largeImage: file.eager[0].secure_url });
+      this.setState({ thumbnail: file.secure_url, largeImage: file.eager[0].secure_url, uploading: false });
     } else {
       // eslint-disable-next-line
       this.setState({ thumbnail: ``, largeImage: `` });
@@ -61,7 +61,10 @@ class CreatePhoto extends Component {
   };
 
   render() {
-    const { title, price, description, photographer, photographerLink, thumbnail } = this.state;
+    const {
+      title, price, description, photographer,
+      photographerLink, thumbnail, uploading
+    } = this.state;
 
     return (
       <Mutation
@@ -79,7 +82,7 @@ class CreatePhoto extends Component {
           }}
           >
             {error && <Message error={error} />}
-            <fieldset disabled={loading} aria-busy={loading}>
+            <fieldset disabled={loading || uploading} aria-busy={loading || uploading}>
               <label htmlFor="file">
                 Image
                 <input
@@ -87,6 +90,7 @@ class CreatePhoto extends Component {
                   id="file"
                   name="file"
                   placeholder="Upload an image"
+                  accept="image/*"
                   required
                   onChange={this.uploadFile}
                 />
@@ -96,11 +100,11 @@ class CreatePhoto extends Component {
               )}
 
               <label htmlFor="title">Title
-                <input type="text" id="title" name="title" placeholder="Title of Photo" value={title} onChange={this.handleChange} />
+                <input type="text" id="title" name="title" placeholder="Title of Photo" value={title} onChange={this.handleChange} required />
               </label>
 
               <label htmlFor="price">Price
-                <input type="number" id="price" name="price" placeholder={100} value={price} onChange={this.handleChange} />
+                <input type="number" id="price" name="price" placeholder={100} value={price} onChange={this.handleChange} required />
               </label>
 
               <label htmlFor="description">Description

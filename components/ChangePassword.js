@@ -69,7 +69,7 @@ export const ChangePassword = () => {
                     />
                   </label>
 
-                  <button type="submit">Sign Up!</button>
+                  <button type="submit">Change Password</button>
                 </fieldset>
               </Form>
             )}
