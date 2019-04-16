@@ -15,6 +15,7 @@ export const SINGLE_PHOTO_QUERY = gql`
       largeImage
       photographer
       photographerLink
+      price
       user {
         id
         permissions

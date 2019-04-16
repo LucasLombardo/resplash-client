@@ -33,10 +33,11 @@ const InfoWrapper = styled.div`
 `;
 
 export const ShowPhotoInfo = ({ photo, hasOwnership }) => {
-  const { description, photographer, photographerLink, title, id } = photo;
+  const { description, price, photographer, photographerLink, title, id } = photo;
   return (
     <InfoWrapper>
       <h3 className="info-item">Title: {title}</h3>
+      <p className="info-item">Price: ${price}</p>
       {description && <p className="info-item">Description: {description}</p>}
       {photographer
         && (
