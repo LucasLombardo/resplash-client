@@ -16,6 +16,8 @@ const CREATE_PHOTO_MUTATION = gql`
     $photographerLink: String
     $thumbnail: String!
     $largeImage: String!
+    $width: Int!
+    $height: Int!
   ) {
     createPhoto(data: {
       title: $title
@@ -25,6 +27,8 @@ const CREATE_PHOTO_MUTATION = gql`
       photographerLink: $photographerLink
       thumbnail: $thumbnail
       largeImage: $largeImage
+      height: $height
+      width: $width
     }) {
       id
     }
@@ -54,7 +58,7 @@ class CreatePhoto extends Component {
       });
       const file = await res.json();
       // eslint-disable-next-line
-      this.setState({ thumbnail: file.secure_url, largeImage: file.eager[0].secure_url, uploading: false });
+      this.setState({ thumbnail: file.secure_url, largeImage: file.eager[0].secure_url, uploading: false, height: file.height, width: file.width });
     } else {
       // eslint-disable-next-line
       this.setState({ thumbnail: ``, largeImage: `` });
