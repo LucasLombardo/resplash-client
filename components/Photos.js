@@ -5,8 +5,8 @@ import { PhotoCard } from './PhotoCard';
 import { Message } from './Message';
 
 export const ALL_PHOTOS_QUERY = gql`
-  query ALL_PHOTOS_QUERY($skip: Int) {
-    photos(orderBy: createdAt_DESC, first: 3, skip: $skip) {
+  query ALL_PHOTOS_QUERY($skip: Int, $first: Int) {
+    photos(orderBy: createdAt_DESC, first: $first, skip: $skip) {
       id
       title
       price
@@ -23,7 +23,7 @@ export const ALL_PHOTOS_QUERY = gql`
 
 
 export const Photos = () => (
-  <Query query={ALL_PHOTOS_QUERY}>
+  <Query query={ALL_PHOTOS_QUERY} variables={{ first: 6 }}>
     {({ data, error, loading, fetchMore }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <Message error={error} />;
@@ -39,7 +39,8 @@ export const Photos = () => (
               type="button"
               onClick={() => fetchMore({
                 variables: {
-                  skip: photos.length
+                  skip: photos.length,
+                  first: 3
                 },
                 updateQuery: (prev, { fetchMoreResult }) => {
                   if (!fetchMoreResult) return prev;
