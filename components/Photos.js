@@ -1,6 +1,7 @@
 import React from 'react';
 import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
+import styled from 'styled-components';
 import { PhotoCard } from './PhotoCard';
 import { Message } from './Message';
 import { FetchMoreLoader } from './FetchMoreLoader';
@@ -27,6 +28,11 @@ export const PHOTO_CONNECTION_QUERY = gql`
   }
 `;
 
+const PhotoGrid = styled.div`
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  grid-gap: 1em;
+`;
 
 export const Photos = () => (
   <Query query={PHOTO_CONNECTION_QUERY}>
@@ -35,7 +41,7 @@ export const Photos = () => (
       if (error) return <Message error={error} />;
       const photoCount = data.photosConnection.aggregate.count;
       return (
-        <Query query={ALL_PHOTOS_QUERY} variables={{ first: 6 }}>
+        <Query query={ALL_PHOTOS_QUERY} variables={{ first: 9 }}>
           {({ data, error, loading, fetchMore }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <Message error={error} />;
@@ -43,9 +49,11 @@ export const Photos = () => (
             const hasMore = photos.length < photoCount;
             return (
               <>
-                { data.photos.map(photo => (
-                  <PhotoCard photo={photo} key={photo.id} />
-                ))}
+                <PhotoGrid>
+                  { data.photos.map(photo => (
+                    <PhotoCard photo={photo} key={photo.id} />
+                  ))}
+                </PhotoGrid>
                 <FetchMoreLoader
                   hasMore={hasMore}
                   fetchFunction={() => fetchMore({
