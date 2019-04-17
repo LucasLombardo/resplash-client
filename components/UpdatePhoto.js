@@ -3,8 +3,9 @@ import { Mutation, Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
-import { ALL_PHOTOS_QUERY } from './Photos';
+import { PHOTO_CONNECTION_QUERY } from './Photos';
 import { Message } from './Message';
+import { deleteCachedPhotos } from '../lib';
 
 const UPDATE_PHOTO_QUERY = gql`
   query UPDATE_PHOTO_QUERY($id: ID!) {
@@ -82,7 +83,8 @@ class UpdatePhoto extends Component {
             <Mutation
               mutation={UPDATE_PHOTO_MUTATION}
               variables={this.state}
-              refetchQueries={[{ query: ALL_PHOTOS_QUERY }]}
+              update={deleteCachedPhotos}
+              refetchQueries={[{ query: PHOTO_CONNECTION_QUERY }]}
             >
               {(updatePhoto, { loading, error }) => (
                 <Form onSubmit={e => this.updatePhoto(e, updatePhoto)}>

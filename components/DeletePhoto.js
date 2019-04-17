@@ -2,7 +2,8 @@ import React from 'react';
 import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
-import { ALL_PHOTOS_QUERY } from './Photos';
+import { PHOTO_CONNECTION_QUERY } from './Photos';
+import { deleteCachedPhotos } from '../lib';
 
 const DELETE_PHOTO_MUTATION = gql`
   mutation DELETE_PHOTO_MUTATION($id: ID!) {
@@ -13,22 +14,17 @@ const DELETE_PHOTO_MUTATION = gql`
 `;
 
 export const DeletePhoto = ({ id, children }) => {
-  const updateCache = (cache, payload) => {
-    // get the query from the cache and filter out the photo being deleted
-    const data = cache.readQuery({ query: ALL_PHOTOS_QUERY });
-    data.photos = data.photos.filter(photo => photo.id !== payload.data.deletePhoto.id);
-    // write the updated photos query (without deleted photo)
-    cache.writeQuery({ query: ALL_PHOTOS_QUERY, data });
-    // route user back to index
+  const onDeletePhoto = (cache) => {
     Router.push({ pathname: `/` });
+    deleteCachedPhotos(cache);
   };
-
 
   return (
     <Mutation
       mutation={DELETE_PHOTO_MUTATION}
       variables={{ id }}
-      update={updateCache}
+      refetchQueries={[{ query: PHOTO_CONNECTION_QUERY }]}
+      update={onDeletePhoto}
     >
       {(deletePhoto, { error }) => (
         <button

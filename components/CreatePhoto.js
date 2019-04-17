@@ -3,8 +3,9 @@ import { Mutation } from 'react-apollo';
 import gql from 'graphql-tag';
 import Router from 'next/router';
 import { Form } from './Form';
-import { ALL_PHOTOS_QUERY } from './Photos';
+import { PHOTO_CONNECTION_QUERY } from './Photos';
 import { Message } from './Message';
+import { deleteCachedPhotos } from '../lib';
 
 const CREATE_PHOTO_MUTATION = gql`
   mutation CREATE_PHOTO_MUTATION(
@@ -70,7 +71,8 @@ class CreatePhoto extends Component {
       <Mutation
         mutation={CREATE_PHOTO_MUTATION}
         variables={this.state}
-        refetchQueries={[{ query: ALL_PHOTOS_QUERY }]}
+        refetchQueries={[{ query: PHOTO_CONNECTION_QUERY }]}
+        update={deleteCachedPhotos}
       >
         {(createPhoto, { loading, error }) => (
           <Form onSubmit={async (e) => {
