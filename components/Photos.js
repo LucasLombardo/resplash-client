@@ -3,6 +3,7 @@ import { Query } from 'react-apollo';
 import gql from 'graphql-tag';
 import { PhotoCard } from './PhotoCard';
 import { Message } from './Message';
+import { FetchMoreLoader } from './FetchMoreLoader';
 
 export const ALL_PHOTOS_QUERY = gql`
   query ALL_PHOTOS_QUERY($skip: Int, $first: Int) {
@@ -38,33 +39,28 @@ export const Photos = () => (
           {({ data, error, loading, fetchMore }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <Message error={error} />;
-            const { photos, photosConnection } = data;
+            const { photos } = data;
             const hasMore = photos.length < photoCount;
             return (
               <>
                 { data.photos.map(photo => (
                   <PhotoCard photo={photo} key={photo.id} />
                 ))}
-                { hasMore && (
-                  <button
-                    type="button"
-                    onClick={() => fetchMore({
-                      variables: {
-                        skip: photos.length,
-                        first: 3
-                      },
-                      updateQuery: (prev, { fetchMoreResult }) => {
-                        if (!fetchMoreResult) return prev;
-                        return Object.assign({}, prev, {
-                          photos: [...prev.photos, ...fetchMoreResult.photos]
-                        });
-                      }
-                    })
+                <FetchMoreLoader
+                  hasMore={hasMore}
+                  fetchFunction={() => fetchMore({
+                    variables: {
+                      skip: photos.length,
+                      first: 3
+                    },
+                    updateQuery: (prev, { fetchMoreResult }) => {
+                      if (!fetchMoreResult) return prev;
+                      return Object.assign({}, prev, {
+                        photos: [...prev.photos, ...fetchMoreResult.photos]
+                      });
                     }
-                  >
-                    Load More
-                  </button>
-                )}
+                  })}
+                />
               </>
             );
           }}
