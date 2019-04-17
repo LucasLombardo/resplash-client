@@ -1,58 +1,63 @@
-import React from 'react';
-import { Query } from 'react-apollo';
-import gql from 'graphql-tag';
+import React, { useState } from 'react';
+import Gallery from "react-photo-gallery";
+import { Container } from "../components";
 
-export const ALL_PHOTOS_QUERY = gql`
-  query ALL_PHOTOS_QUERY($skip: Int) {
-    photos(orderBy: createdAt_DESC, first: 3, skip: $skip) {
-      id
-      title
-    }
-    photosConnection {
-      aggregate {
-        count
-      }
-    }
+const photos = [
+  {
+    src: `https://source.unsplash.com/2ShvY8Lf6l0/800x599`,
+    width: 4,
+    height: 3
+  },
+  {
+    src: `https://source.unsplash.com/Dm-qxdynoEc/800x799`,
+    width: 1,
+    height: 1
+  },
+  {
+    src: `https://source.unsplash.com/qDkso9nvCg0/600x799`,
+    width: 3,
+    height: 4
+  },
+  {
+    src: `https://source.unsplash.com/iecJiKe_RNg/600x799`,
+    width: 3,
+    height: 4
+  },
+  {
+    src: `https://source.unsplash.com/epcsn8Ed8kY/600x799`,
+    width: 3,
+    height: 4
+  },
+  {
+    src: `https://source.unsplash.com/NQSWvyVRIJk/800x599`,
+    width: 4,
+    height: 3
+  },
+  {
+    src: `https://source.unsplash.com/zh7GEuORbUw/600x799`,
+    width: 3,
+    height: 4
+  },
+  {
+    src: `https://source.unsplash.com/PpOHJezOalU/800x599`,
+    width: 4,
+    height: 3
+  },
+  {
+    src: `https://source.unsplash.com/I1ASdgphUH4/800x599`,
+    width: 4,
+    height: 3
   }
-`;
+];
 
-const Photos = () => (
-  <Query query={ALL_PHOTOS_QUERY}>
-    {({ data, error, loading, fetchMore }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <p>Error: {error.message}</p>;
-      const { photos, photosConnection } = data;
-      const hasMore = photos.length < photosConnection.aggregate.count;
-      return (
-        <div>
-          <p>pagination</p>
-          {photos.map(photo => (
-            <div style={{ margin: `20px 1em` }} key={photo.id}>{photo.title}</div>
-          ))}
-
-          { hasMore && (
-            <button
-              type="button"
-              onClick={() => fetchMore({
-                variables: {
-                  skip: photos.length
-                },
-                updateQuery: (prev, { fetchMoreResult }) => {
-                  if (!fetchMoreResult) return prev;
-                  return Object.assign({}, prev, {
-                    photos: [...prev.photos, ...fetchMoreResult.photos]
-                  });
-                }
-              })
-              }
-            >
-                Load More
-            </button>
-          )}
-        </div>
-      );
-    }}
-  </Query>
-);
+const Photos = () => {
+  const [slice, setSlice] = useState(3);
+  return (
+    <Container>
+      <Gallery photos={photos.slice(0, slice)} />
+      <button type="button" onClick={() => setSlice(slice + 2)}>more</button>
+    </Container>
+  );
+};
 
 export default Photos;
