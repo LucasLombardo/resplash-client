@@ -18,6 +18,8 @@ const CREATE_PHOTO_MUTATION = gql`
     $largeImage: String!
     $width: Int!
     $height: Int!
+    $lowercaseTitle: String
+    $lowercaseDescription: String
   ) {
     createPhoto(data: {
       title: $title
@@ -29,6 +31,8 @@ const CREATE_PHOTO_MUTATION = gql`
       largeImage: $largeImage
       height: $height
       width: $width
+      lowercaseTitle: $lowercaseTitle
+      lowercaseDescription: $lowercaseDescription
     }) {
       id
     }
@@ -37,13 +41,35 @@ const CREATE_PHOTO_MUTATION = gql`
 
 class CreatePhoto extends Component {
   // eslint-disable-next-line
-  state = { image: ``, uploading: false, title: ``, price: ``, description: ``, photographer: ``, photographerLink: ``, thumbnail: ``, largeImage: `` }
+  state = { 
+    uploading: false,
+    title: ``,
+    price: ``,
+    description: ``,
+    photographer: ``,
+    photographerLink: ``,
+    thumbnail: ``,
+    largeImage: ``,
+    lowercaseTitle: ``,
+    lowercaseDescription: ``
+  }
 
   handleChange = (e) => {
     const { name, type, value } = e.target;
     const val = type === `number` ? parseFloat(value) : value;
     this.setState({ [name]: val });
   };
+
+  handleDescriptionChange = (e) => {
+    const description = e.target.value;
+    this.setState({ description, lowercaseDescription: description.toLowerCase() });
+  }
+
+  handleTitleChange = (e) => {
+    const title = e.target.value;
+    this.setState({ title, lowercaseTitle: title.toLowerCase() });
+  }
+
 
   uploadFile = async (e) => {
     const { files } = e.target;
@@ -106,7 +132,7 @@ class CreatePhoto extends Component {
               )}
 
               <label htmlFor="title">Title
-                <input type="text" id="title" name="title" placeholder="Title of Photo" value={title} onChange={this.handleChange} required />
+                <input type="text" id="title" name="title" placeholder="Title of Photo" value={title} onChange={this.handleTitleChange} required />
               </label>
 
               <label htmlFor="price">Price
@@ -114,7 +140,7 @@ class CreatePhoto extends Component {
               </label>
 
               <label htmlFor="description">Description
-                <input type="text" id="description" name="description" placeholder="Description" value={description} onChange={this.handleChange} />
+                <input type="text" id="description" name="description" placeholder="Description" value={description} onChange={this.handleDescriptionChange} />
               </label>
 
               <label htmlFor="photographer">Photographer

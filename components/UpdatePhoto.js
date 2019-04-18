@@ -26,6 +26,8 @@ const UPDATE_PHOTO_MUTATION = gql`
     $id: ID!
     $title: String
     $description: String
+    $lowercaseTitle: String
+    $lowercaseDescription: String
     $price: Int
     $photographer: String
     $photographerLink: String
@@ -34,6 +36,8 @@ const UPDATE_PHOTO_MUTATION = gql`
       id: $id
       title: $title
       description: $description
+      lowercaseTitle: $lowercaseTitle
+      lowercaseDescription: $lowercaseDescription
       price: $price
       photographer: $photographer
       photographerLink: $photographerLink
@@ -52,6 +56,16 @@ class UpdatePhoto extends Component {
     const val = type === `number` ? parseFloat(value) : value;
     this.setState({ [name]: val });
   };
+
+  handleDescriptionChange = (e) => {
+    const description = e.target.value;
+    this.setState({ description, lowercaseDescription: description.toLowerCase() });
+  }
+
+  handleTitleChange = (e) => {
+    const title = e.target.value;
+    this.setState({ title, lowercaseTitle: title.toLowerCase() });
+  }
 
   updatePhoto = async (e, updateItemMutation) => {
     e.preventDefault();
@@ -91,7 +105,7 @@ class UpdatePhoto extends Component {
                   {error && <Message error={error} />}
                   <fieldset disabled={loading} aria-busy={loading}>
                     <label htmlFor="title">Title
-                      <input type="text" id="title" name="title" placeholder="Title of Photo" defaultValue={title} onChange={this.handleChange} />
+                      <input type="text" id="title" name="title" placeholder="Title of Photo" defaultValue={title} onChange={this.handleTitleChange} />
                     </label>
 
                     <label htmlFor="price">Price
@@ -99,7 +113,7 @@ class UpdatePhoto extends Component {
                     </label>
 
                     <label htmlFor="description">Description
-                      <input type="text" id="description" name="description" placeholder="Description" defaultValue={description} onChange={this.handleChange} />
+                      <input type="text" id="description" name="description" placeholder="Description" defaultValue={description} onChange={this.handleDescriptionChange} />
                     </label>
 
                     <label htmlFor="photographer">Photographer

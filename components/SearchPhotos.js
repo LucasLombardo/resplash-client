@@ -8,7 +8,7 @@ import { FetchMoreLoader } from './FetchMoreLoader';
 
 export const SEARCH_PHOTOS_QUERY = gql`
   query SEARCH_PHOTOS_QUERY($skip: Int, $first: Int, $search: String) {
-    photos(orderBy: createdAt_DESC, first: $first, skip: $skip, where: { OR: [{ title_contains: $search }, { description_contains: $search }] }) {
+    photos(orderBy: createdAt_DESC, first: $first, skip: $skip, where: { OR: [{ lowercaseTitle_contains: $search }, { lowercaseDescription_contains: $search }] }) {
       id
       title
       price
@@ -37,7 +37,7 @@ export const SearchPhotos = ({ search }) => (
       if (error) return <Message error={error} />;
       const photoCount = data.photosConnection.aggregate.count;
       return (
-        <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search }}>
+        <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search: search.toLowerCase() }}>
           {({ data, error, loading, fetchMore }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <Message error={error} />;
