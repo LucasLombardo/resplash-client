@@ -24,7 +24,9 @@ export const FetchMoreLoader = ({ hasMore, fetchFunction }) => {
   };
 
   useEffect(() => {
-    handleScroll();
+    // wait for images to load before checking if on bottom
+    setTimeout(handleScroll, 1000);
+
     window.addEventListener(`scroll`, handleScroll);
     return () => window.removeEventListener(`scroll`, handleScroll);
   }, [bottom]);
