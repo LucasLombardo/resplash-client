@@ -27,11 +27,13 @@ export const GalleryPhoto = ({ index, onClick, photo, margin, direction, top, le
   /* eslint-disable */
   return (
     <Link href={{ pathname: `/photo`, query: { id: photo.id } }}>
+      <a>
       <Image
         style={onClick ? { ...imgStyle, ...imgWithClick } : imgStyle}
         {...photo}
         onClick={onClick ? handleClick : null}
-      />
+        />
+      </a>
     </Link>
   );
   /* eslint-enable */

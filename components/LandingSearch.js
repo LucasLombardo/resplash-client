@@ -64,7 +64,7 @@ export const LandingSearch = () => {
     <Search>
       <form className="search-container" onSubmit={handleSearch}>
         <input type="text" id="search-bar" placeholder="" value={search} onChange={e => setSearch(e.target.value)} />
-        <a href="#" onClick={handleSearch}><img className="search-icon" alt="search" src="http://www.endlessicons.com/wp-content/uploads/2012/12/search-icon.png" /></a>
+        <a href="#" onClick={handleSearch}><img className="search-icon" alt="search" src="https://res.cloudinary.com/dov1pamgz/image/upload/v1555630945/search-icon.png" /></a>
       </form>
     </Search>
   );
