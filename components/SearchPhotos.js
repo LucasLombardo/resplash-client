@@ -20,9 +20,9 @@ export const SEARCH_PHOTOS_QUERY = gql`
   }
 `;
 
-export const PHOTO_CONNECTION_QUERY = gql`
-  query PHOTO_CONNECTION_QUERY {
-    photosConnection {
+export const SEARCH_PHOTO_CONNECTION_QUERY = gql`
+  query SEARCH_PHOTO_CONNECTION_QUERY($search: String) {
+    photosConnection(where: { OR: [{ lowercaseTitle_contains: $search }, { lowercaseDescription_contains: $search }] }) {
       aggregate {
         count
       }
@@ -30,51 +30,53 @@ export const PHOTO_CONNECTION_QUERY = gql`
   }
 `;
 
-export const SearchPhotos = props => (
-  <Query query={PHOTO_CONNECTION_QUERY}>
-    {({ data, error, loading }) => {
-      if (loading) return <p>Loading...</p>;
-      if (error) return <Message error={error} />;
-      const photoCount = data.photosConnection.aggregate.count;
-      const search = props.search ? props.search.toLowerCase() : ``;
-      return (
-        <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search }}>
-          {({ data, error, loading, fetchMore }) => {
-            if (loading) return <p>Loading...</p>;
-            if (error) return <Message error={error} />;
-            const { photos } = data;
-            const hasMore = photos.length < photoCount;
-            const displayPhotos = photos.map(({ height, width, thumbnail, description, id }) => ({
-              height,
-              width,
-              id,
-              alt: description,
-              src: thumbnail,
-            }));
-            return (
-              <>
-                <Gallery photos={displayPhotos} ImageComponent={GalleryPhoto} margin={6} />
-                <FetchMoreLoader
-                  hasMore={hasMore}
-                  fetchFunction={() => fetchMore({
-                    variables: {
-                      skip: photos.length,
-                      first: 3,
-                      search
-                    },
-                    updateQuery: (prev, { fetchMoreResult }) => {
-                      if (!fetchMoreResult) return prev;
-                      return Object.assign({}, prev, {
-                        photos: [...prev.photos, ...fetchMoreResult.photos]
-                      });
-                    }
-                  })}
-                />
-              </>
-            );
-          }}
-        </Query>
-      );
-    }}
-  </Query>
-);
+export const SearchPhotos = (props) => {
+  const search = props.search ? props.search.toLowerCase() : ``;
+  return (
+    <Query query={SEARCH_PHOTO_CONNECTION_QUERY} variables={{ search }}>
+      {({ data, error, loading }) => {
+        if (loading) return <p>Loading...</p>;
+        if (error) return <Message error={error} />;
+        const photoCount = data.photosConnection.aggregate.count;
+        return (
+          <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search }}>
+            {({ data, error, loading, fetchMore }) => {
+              if (loading) return <p>Loading...</p>;
+              if (error) return <Message error={error} />;
+              const { photos } = data;
+              const hasMore = photos.length < photoCount;
+              const displayPhotos = photos.map(({ height, width, thumbnail, description, id }) => ({
+                height,
+                width,
+                id,
+                alt: description,
+                src: thumbnail,
+              }));
+              return (
+                <>
+                  <Gallery photos={displayPhotos} ImageComponent={GalleryPhoto} margin={6} />
+                  <FetchMoreLoader
+                    hasMore={hasMore}
+                    fetchFunction={() => fetchMore({
+                      variables: {
+                        skip: photos.length,
+                        first: 3,
+                        search
+                      },
+                      updateQuery: (prev, { fetchMoreResult }) => {
+                        if (!fetchMoreResult) return prev;
+                        return Object.assign({}, prev, {
+                          photos: [...prev.photos, ...fetchMoreResult.photos]
+                        });
+                      }
+                    })}
+                  />
+                </>
+              );
+            }}
+          </Query>
+        );
+      }}
+    </Query>
+  );
+};
