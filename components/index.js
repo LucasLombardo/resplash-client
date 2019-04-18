@@ -14,3 +14,4 @@ export * from './SignIn';
 export * from './SignUp';
 export * from './ShowPhoto';
 export * from './UpdatePhoto';
+export * from './SearchPhotos';
