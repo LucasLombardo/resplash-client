@@ -50,6 +50,7 @@ const InfoWrapper = styled.section`
   width: 50%;
   background: white;
   transform: skewY(4deg) translateY(20px);
+  border-bottom: 2px solid #777;
   }
   &::after {
     content: '';
@@ -60,6 +61,7 @@ const InfoWrapper = styled.section`
   width: 50%;
   background: white;
   transform: skewY(-4deg) translateY(20px);
+  border-bottom: 2px solid #777;
   }
 `;
 

@@ -3,11 +3,17 @@ import styled from 'styled-components';
 import { Container } from './Container';
 
 const Featured = styled.div`
+    /* background: linear-gradient(
+      rgba(237,58,83, 0.45), 
+      rgba(237,58,83, 0.45)
+    ), url('https://res.cloudinary.com/dov1pamgz/image/upload/v1555602146/ep_naturalwhite.png'); */
     background: linear-gradient(
-      rgba(176, 196, 222, 0.45), 
-      rgba(176, 196, 222, 0.45)
-    ), url('https://res.cloudinary.com/dov1pamgz/image/upload/v1555602146/ep_naturalwhite.png');
+      rgba(255,255,255, 0.8), 
+      rgba(255,255,255, 0.8)
+    ), url('https://res.cloudinary.com/dov1pamgz/image/upload/v1555594055/background.jpg') no-repeat center center fixed;
+    background-size: cover;
     padding: 2em 0 4em;
+    border-bottom: 2px solid #777;
     h2 {
       text-align: center;
       font-size: 2em;
