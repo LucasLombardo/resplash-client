@@ -30,14 +30,15 @@ export const PHOTO_CONNECTION_QUERY = gql`
   }
 `;
 
-export const SearchPhotos = ({ search }) => (
+export const SearchPhotos = props => (
   <Query query={PHOTO_CONNECTION_QUERY}>
     {({ data, error, loading }) => {
       if (loading) return <p>Loading...</p>;
       if (error) return <Message error={error} />;
       const photoCount = data.photosConnection.aggregate.count;
+      const search = props.search ? props.search.toLowerCase() : ``;
       return (
-        <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search: search.toLowerCase() }}>
+        <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search }}>
           {({ data, error, loading, fetchMore }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <Message error={error} />;
