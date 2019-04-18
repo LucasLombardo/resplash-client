@@ -5,13 +5,11 @@ import { Container } from './Container';
 const InfoWrapper = styled.section`
   background: white;
   position: relative;
-  /* overflow: hidden; */
   display: flex;
   align-items: center;
   justify-content: center;
   flex-direction: column;
   text-align: center;
-  padding-bottom: 1em;
   p {
     margin: 0;
   }
@@ -43,25 +41,25 @@ const InfoWrapper = styled.section`
 
   &::before {
     content: '';
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  height: 80px;
-  width: 50%;
-  background: white;
-  transform: skewY(4deg) translateY(20px);
-  border-bottom: 2px solid #777;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    height: 200px;
+    width: 50%;
+    background: white;
+    transform: skewY(4deg) translateY(30px);
+    border-bottom: 2px solid #777;
   }
   &::after {
     content: '';
-  position: absolute;
-  bottom: 0;
-  right: 0;
-  height: 80px;
-  width: 50%;
-  background: white;
-  transform: skewY(-4deg) translateY(20px);
-  border-bottom: 2px solid #777;
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    height: 200px;
+    width: 50%;
+    background: white;
+    transform: skewY(-4deg) translateY(30px);
+    border-bottom: 2px solid #777;
   }
 `;
 
