@@ -12,7 +12,7 @@ export const FetchMoreLoader = ({ hasMore, fetchFunction }) => {
   const loadingIcon = useRef();
 
   const handleScroll = async () => {
-    if (!bottom && hasMore) {
+    if (!bottom && hasMore && loadingIcon.current) {
       const elPosition = loadingIcon.current.offsetTop + 15;
       const viewPosition = window.pageYOffset + window.innerHeight;
       if (elPosition < viewPosition) {
