@@ -27,14 +27,14 @@ const InfoWrapper = styled.section`
     color: white;
     text-decoration: none;
     text-transform: uppercase;
-    background: lightskyblue;
+    background: #FF8449;
     padding: 20px;
     border-radius: 50px;
     display: inline-block;
     border: none;
     transition: 0.4s ease 0s;
     &:hover {
-      text-shadow: 0px 0px 6px rgba(255, 255, 255, 1);
+      text-shadow: 0px 0px 6px rgba(255, 255, 255, 0.4);
       box-shadow: 0px 5px 40px -10px rgba(0,0,0,0.57);
     }
   }
