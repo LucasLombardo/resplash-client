@@ -16,7 +16,7 @@ export const Form = styled.form`
         display: block;
         max-width: 240px;
         border: 1px solid black;
-        margin: 0 auto;
+        margin: 0 auto 1em;
     }
     input {
         width: 100%;
