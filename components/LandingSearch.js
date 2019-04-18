@@ -51,12 +51,15 @@ const Search = styled.div`
 
 export const LandingSearch = () => {
   const [search, setSearch] = useState(``);
-  const handleSearch = () => {
+
+  const handleSearch = (e) => {
+    e.preventDefault();
     Router.push({
       pathname: `/photos`,
       query: { search }
     });
   };
+
   return (
     <Search>
       <form className="search-container" onSubmit={handleSearch}>
