@@ -23,7 +23,7 @@ const InfoWrapper = styled.section`
   }
   a {
     display: block;
-    margin: 2em auto;
+    margin: 2em auto 1em;
     color: white;
     text-decoration: none;
     text-transform: uppercase;
