@@ -1,9 +1,17 @@
 import styled from 'styled-components';
 
 export const Form = styled.form`
-    max-width: 600px;
+    max-width: 480px;
     margin: 0 auto;
     font-size: 1.1em;
+    fieldset {
+        padding: 3em 5em;
+        background: rgba(255,255,255,01);
+        border: 2px solid #777;
+    }
+    h2 {
+        text-align: center;
+    }
     img {
         display: block;
         max-width: 240px;
@@ -13,6 +21,11 @@ export const Form = styled.form`
     input {
         width: 100%;
         display: block;
-        margin-bottom: 1em;
+        margin: 0.3em 0 1em;
+        height: 36px;
+        font-size: 12px;
+    }
+    button {
+        height: 36px;
     }
 `;
