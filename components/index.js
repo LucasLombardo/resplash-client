@@ -8,6 +8,7 @@ export * from './LandingInfo';
 export * from './LandingSearch';
 export * from './Layout';
 export * from './Meta';
+export * from './GatedContent';
 export * from './Nav';
 export * from './Photos';
 export * from './SignIn';

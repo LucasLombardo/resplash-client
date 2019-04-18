@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from 'styled-components';
-import { ChangePassword, Container } from '../components';
+import { ChangePassword, Container, GatedContent } from '../components';
 
 const ChangePasswordWrapper = styled.div`
   padding-bottom: 4em;
@@ -20,17 +20,19 @@ const ChangePasswordWrapper = styled.div`
 `;
 
 const ChangePasswordPage = () => (
-  <ChangePasswordWrapper>
-    <Container>
-      <h1>Change Your Password</h1>
-      <img alt="Three people welcoming you." src="https://res.cloudinary.com/dov1pamgz/image/upload/v1555627257/fogg-unsubscribed-1.png" />
-      <p>
+  <GatedContent>
+    <ChangePasswordWrapper>
+      <Container>
+        <h1>Change Your Password</h1>
+        <img alt="Three people welcoming you." src="https://res.cloudinary.com/dov1pamgz/image/upload/v1555627257/fogg-unsubscribed-1.png" />
+        <p>
         don&#39;t share your password with anyone,<br />
         resplash employees will never ask for it
-      </p>
-      <ChangePassword />
-    </Container>
-  </ChangePasswordWrapper>
+        </p>
+        <ChangePassword />
+      </Container>
+    </ChangePasswordWrapper>
+  </GatedContent>
 );
 
 

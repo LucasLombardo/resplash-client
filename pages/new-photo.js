@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import { CreatePhoto } from '../components';
-import { GatedContent } from '../components/GatedContent';
+import { CreatePhoto, GatedContent } from '../components';
+
 
 const NewPhotoWrapper = styled.div`
   padding-bottom: 4em;
