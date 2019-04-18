@@ -37,7 +37,7 @@ export const Photos = () => (
       if (error) return <Message error={error} />;
       const photoCount = data.photosConnection.aggregate.count;
       return (
-        <Query query={ALL_PHOTOS_QUERY} variables={{ first: 3 }}>
+        <Query query={ALL_PHOTOS_QUERY} variables={{ first: 9 }}>
           {({ data, error, loading, fetchMore }) => {
             if (loading) return <p>Loading...</p>;
             if (error) return <Message error={error} />;
@@ -52,7 +52,7 @@ export const Photos = () => (
             }));
             return (
               <>
-                <Gallery photos={displayPhotos} ImageComponent={GalleryPhoto} />
+                <Gallery photos={displayPhotos} ImageComponent={GalleryPhoto} margin={6} />
                 <FetchMoreLoader
                   hasMore={hasMore}
                   fetchFunction={() => fetchMore({
