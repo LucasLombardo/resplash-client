@@ -19,18 +19,20 @@ const NavBar = styled.nav`
     background: none;
     border: none;
     display: block;
-    margin: .8em 0.5em 1em;
+    margin: .8em 0.5em 0.7em;
     padding: 3px;
-    border: 1px solid rgba(0,0,0,0);
     color: black;
     text-decoration: none;
-    font-size: 1.1em;
+    font-size: 0.9em;
+    border-bottom: 4px solid rgba(0,0,0,0);
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
+    transition: 0.3s ease;
 
     &:hover {
-      border: 1px solid black;
+      border-bottom: 4px solid #FF8449;
+      border-radius: 2px;
     }
   }
 `;
@@ -41,14 +43,16 @@ export const Nav = () => (
       <User>
         {({ data }) => (data.me ? (
           <>
-            <Link href="/"><a>Home</a></Link>
+            <Link href="/"><a>Resplash</a></Link>
+            <Link href="photos"><a>Photos</a></Link>
             <Link href="new-photo"><a>New Photo</a></Link>
             <Link href="change-password"><a>Change PW</a></Link>
             <SignOut />
           </>
         ) : (
           <>
-            <Link href="/"><a>Home</a></Link>
+            <Link href="/"><a>Resplash</a></Link>
+            <Link href="photos"><a>Photos</a></Link>
             <Link href="sign-in"><a>Sign In</a></Link>
             <Link href="sign-up"><a>Sign Up</a></Link>
           </>
