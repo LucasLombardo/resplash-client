@@ -16,9 +16,10 @@ const InfoWrapper = styled.div`
         margin: 10px 0;
     }
     .options {
-      margin: 1em 0 2em;
+      margin: 1em 0 1em;
+      display: flex;
+      justify-content: left;
       a, button {
-        display: inline-block;
         background: none;
         padding: 1em;
         margin-right: 0.2em;
