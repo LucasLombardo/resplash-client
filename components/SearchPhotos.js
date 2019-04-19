@@ -33,7 +33,7 @@ export const SEARCH_PHOTO_CONNECTION_QUERY = gql`
 export const SearchPhotos = (props) => {
   const search = props.search ? props.search.toLowerCase() : ``;
   return (
-    <Query query={SEARCH_PHOTO_CONNECTION_QUERY} variables={{ search }}>
+    <Query query={SEARCH_PHOTO_CONNECTION_QUERY} variables={{ search }} fetchPolicy="network-only">
       {({ data, error, loading }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <Message error={error} />;
@@ -48,7 +48,7 @@ export const SearchPhotos = (props) => {
               const displayPhotos = photos.map(({ height, width, thumbnail, description, id }, i) => ({
                 height,
                 width,
-                id: `${id}-${i}`,
+                id,
                 alt: description,
                 src: thumbnail,
               }));
