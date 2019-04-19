@@ -27,7 +27,7 @@ const Landing = () => (
       <p>high quality, royalty free images</p>
       <img src="https://res.cloudinary.com/dov1pamgz/image/upload/v1555596385/fogg-delivery-1.png" alt="" />
       <p>hassle free shopping experience with no subscriptions or minimum purchases</p>
-      <Link href="sign-up">Sign Up Now</Link>
+      <Link href="sign-up"><a>Sign Up Now</a></Link>
     </LandingInfo>
     <LandingFeatured />
     <Container className="all-photos">

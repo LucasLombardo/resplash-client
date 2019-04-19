@@ -7,6 +7,10 @@ import { Container } from './Container';
 
 const NavBar = styled.nav`
   border-bottom: 1px solid black;
+  background: linear-gradient(
+      rgba(255,255,255, 0.8), 
+      rgba(255,255,255, 0.8)
+    ),url('https://res.cloudinary.com/dov1pamgz/image/upload/v1555632179/gravel.png');
   .nav-container {
     display: flex;
     justify-content: space-between;
