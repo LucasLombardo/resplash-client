@@ -72,3 +72,6 @@ APP_SECRET="secret string for app (can be any string just don't tell anyone)"
 PORT=4444
 ```
 After that run `npm run deploy` to migrate the datamodels to your prisma server and finally run `npm run dev` to run you local graphql yoga server which will be hosted on the port specified in your .env file (4444).
+
+#### Illustrations
+All illustrations are by [Icons8 Ouch!](https://icons8.com/ouch/).
