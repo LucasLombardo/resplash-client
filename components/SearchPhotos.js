@@ -45,10 +45,10 @@ export const SearchPhotos = (props) => {
               if (error) return <Message error={error} />;
               const { photos } = data;
               const hasMore = photos.length < photoCount;
-              const displayPhotos = photos.map(({ height, width, thumbnail, description, id }) => ({
+              const displayPhotos = photos.map(({ height, width, thumbnail, description, id }, i) => ({
                 height,
                 width,
-                id,
+                id: `${id}-${i}`,
                 alt: description,
                 src: thumbnail,
               }));
@@ -60,7 +60,7 @@ export const SearchPhotos = (props) => {
                     fetchFunction={() => fetchMore({
                       variables: {
                         skip: photos.length,
-                        first: 3,
+                        first: 12,
                         search
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
