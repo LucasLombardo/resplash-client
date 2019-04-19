@@ -36,6 +36,10 @@ export const ChangePassword = () => {
                 method="post"
                 onSubmit={async (e) => {
                   e.preventDefault();
+                  setTimeout(() => {
+                    setNewPassword(``);
+                    setPassword(``);
+                  }, 100);
                   await changePassword();
                   setNewPassword(``);
                   setPassword(``);

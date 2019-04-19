@@ -32,6 +32,10 @@ export const SignIn = () => {
           method="post"
           onSubmit={async (e) => {
             e.preventDefault();
+            setTimeout(() => {
+              setEmail(``);
+              setPassword(``);
+            }, 100);
             await signIn();
             setEmail(``);
             setPassword(``);

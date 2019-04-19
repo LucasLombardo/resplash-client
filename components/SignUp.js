@@ -40,6 +40,9 @@ class SignUp extends Component {
             method="post"
             onSubmit={async (e) => {
               e.preventDefault();
+              setTimeout(() => {
+                this.setState({ name: ``, email: ``, password: `` });
+              }, 100);
               await signup();
               this.setState({ name: ``, email: ``, password: `` });
               Router.push({
