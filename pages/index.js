@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
 import Link from 'next/link';
-import { LandingHeader, LandingInfo, LandingSearch, LandingFeatured, Photos, Container } from '../components';
+import { LandingHeader, LandingInfo, LandingSearch, LandingFeatured, SearchPhotos, Container } from '../components';
 
 const LandingWrapper = styled.div`
   .all-photos {
@@ -32,7 +32,7 @@ const Landing = () => (
     <LandingFeatured />
     <Container className="all-photos">
       <h2>All Photos</h2>
-      <Photos />
+      <SearchPhotos search="" />
     </Container>
   </LandingWrapper>
 );
