@@ -51,6 +51,10 @@ class UpdatePhoto extends Component {
   // eslint-disable-next-line
   state = {}
 
+  componentDidMount() {
+    setTimeout(() => this.setState({ loadTimePassed: true }), 300);
+  }
+
   handleChange = (e) => {
     const { name, type, value } = e.target;
     const val = type === `number` ? parseFloat(value) : value;
@@ -90,7 +94,10 @@ class UpdatePhoto extends Component {
       >
         {({ data, loading }) => {
           if (loading) return <p>Loading...</p>;
-          if (!data.photo) return <p>No Photo Found for ID {id}</p>;
+          if (!data.photo && this.state.loadTimePassed) {
+            return <p>No Photo Found for id:{id}</p>;
+          }
+          if (!data.photo) return <p>Loading...</p>;
           const { title, price, description, photographer, photographerLink } = data.photo;
 
           return (

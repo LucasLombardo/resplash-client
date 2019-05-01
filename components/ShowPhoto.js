@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import gql from 'graphql-tag';
 import { Query } from 'react-apollo';
 import Head from 'next/head';
@@ -35,42 +35,52 @@ const ShowPhotoWrapper = styled.div`
   }
 `;
 
-export const ShowPhoto = ({ id }) => (
-  <Query query={SINGLE_PHOTO_QUERY} variables={{ id }}>
-    {({ error, loading, data }) => {
-      if (error) return <p>error</p>;
-      if (loading) return <p>Loading...</p>;
-      if (!data.photo) return <p>No Photo Found for {id}</p>;
-      const { photo } = data;
-      return (
-        <User>
-          {({ data }) => {
-            let hasOwnership = false;
-            // check if user created the photo
-            if (data.me && data.me.id === photo.user.id) {
-              hasOwnership = true;
-            }
-            // check if user is an admin
-            if (data.me && data.me.permissions.includes(`ADMIN`)) {
-              hasOwnership = true;
-            }
-            return (
-              <>
-                <Head>
-                  <title>Resplash ~ {photo.title}</title>
-                </Head>
-                <ShowPhotoWrapper>
-                  <h1>Viewing  &quot;{photo.title}&quot;</h1>
-                  <div className="content">
-                    <img src={photo.largeImage} alt={photo.title} />
-                    <ShowPhotoInfo photo={photo} hasOwnership={hasOwnership} />
-                  </div>
-                </ShowPhotoWrapper>
-              </>
-            );
-          }}
-        </User>
-      );
-    }}
-  </Query>
-);
+export const ShowPhoto = ({ id }) => {
+  const [loadTimePassed, setLoadTimePassed] = useState(false);
+  useEffect(() => {
+    setTimeout(() => setLoadTimePassed(true), 300);
+  }, [loadTimePassed]);
+
+  return (
+    <Query query={SINGLE_PHOTO_QUERY} variables={{ id }}>
+      {({ error, loading, data }) => {
+        if (error) return <p>error</p>;
+        if (loading) return <p>Loading...</p>;
+        if (!data.photo && loadTimePassed) {
+          return <p>No Photo Found for id:{id}</p>;
+        }
+        if (!data.photo) return <p>Loading...</p>;
+        const { photo } = data;
+        return (
+          <User>
+            {({ data }) => {
+              let hasOwnership = false;
+              // check if user created the photo
+              if (data.me && data.me.id === photo.user.id) {
+                hasOwnership = true;
+              }
+              // check if user is an admin
+              if (data.me && data.me.permissions.includes(`ADMIN`)) {
+                hasOwnership = true;
+              }
+              return (
+                <>
+                  <Head>
+                    <title>Resplash ~ {photo.title}</title>
+                  </Head>
+                  <ShowPhotoWrapper>
+                    <h1>Viewing  &quot;{photo.title}&quot;</h1>
+                    <div className="content">
+                      <img src={photo.largeImage} alt={photo.title} />
+                      <ShowPhotoInfo photo={photo} hasOwnership={hasOwnership} />
+                    </div>
+                  </ShowPhotoWrapper>
+                </>
+              );
+            }}
+          </User>
+        );
+      }}
+    </Query>
+  );
+};
