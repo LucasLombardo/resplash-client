@@ -46,7 +46,7 @@ export const Nav = () => (
             <Link href="/"><a>Resplash</a></Link>
             <Link href="photos"><a>Photos</a></Link>
             <Link href="new-photo"><a>New Photo</a></Link>
-            <Link href="change-password"><a>Change PW</a></Link>
+            {/* <Link href="change-password"><a>Change PW</a></Link> */}
             <SignOut />
           </>
         ) : (
