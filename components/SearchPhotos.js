@@ -5,6 +5,7 @@ import Gallery from "react-photo-gallery";
 import { GalleryPhoto } from './GalleryPhoto';
 import { Message } from './Message';
 import { FetchMoreLoader } from './FetchMoreLoader';
+/* eslint no-shadow: 0 react/destructuring-assignment: 0 */
 
 export const SEARCH_PHOTOS_QUERY = gql`
   query SEARCH_PHOTOS_QUERY($skip: Int, $first: Int, $search: String) {
@@ -39,12 +40,13 @@ export const SearchPhotos = (props) => {
         if (error) return <Message error={error} />;
         const photoCount = data.photosConnection.aggregate.count;
         return (
-          <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 9, search }}>
+          <Query query={SEARCH_PHOTOS_QUERY} variables={{ first: 12, search }}>
             {({ data, error, loading, fetchMore }) => {
               if (loading) return <p>Loading...</p>;
               if (error) return <Message error={error} />;
               const { photos } = data;
               const hasMore = photos.length < photoCount;
+              // eslint-disable-next-line
               const displayPhotos = photos.map(({ height, width, thumbnail, description, id }, i) => ({
                 height,
                 width,
@@ -60,7 +62,7 @@ export const SearchPhotos = (props) => {
                     fetchFunction={() => fetchMore({
                       variables: {
                         skip: photos.length,
-                        first: 12,
+                        first: 15,
                         search
                       },
                       updateQuery: (prev, { fetchMoreResult }) => {
