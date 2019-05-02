@@ -31,7 +31,11 @@ const ShowPhotoWrapper = styled.div`
   }
   img {
     max-width: 100%;
+    max-height: 70vh;
+    height: auto;
     margin-bottom: 1em;
+    border: 1px solid #777;
+    margin-right: -1px;
   }
 `;
 
