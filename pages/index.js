@@ -19,7 +19,7 @@ const Landing = () => (
   <LandingWrapper>
     <LandingHeader>
       <h1>The best stock photos on the web.</h1>
-      <p>search over 60 beautiful photos</p>
+      <p>search over 100 beautiful photos</p>
       <LandingSearch />
     </LandingHeader>
     <LandingInfo>
