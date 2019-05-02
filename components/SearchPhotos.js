@@ -34,7 +34,7 @@ export const SEARCH_PHOTO_CONNECTION_QUERY = gql`
 export const SearchPhotos = (props) => {
   const search = props.search ? props.search.toLowerCase() : ``;
   return (
-    <Query query={SEARCH_PHOTO_CONNECTION_QUERY} variables={{ search }} fetchPolicy="network-only">
+    <Query query={SEARCH_PHOTO_CONNECTION_QUERY} variables={{ search }}>
       {({ data, error, loading }) => {
         if (loading) return <p>Loading...</p>;
         if (error) return <Message error={error} />;
