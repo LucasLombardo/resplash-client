@@ -13,7 +13,6 @@ const NavBar = styled.nav`
     ),url('https://res.cloudinary.com/dov1pamgz/image/upload/v1555632179/gravel.png');
   .nav-container {
     display: flex;
-    justify-content: space-between;
   }
   a, button {
     background: none;
@@ -29,6 +28,15 @@ const NavBar = styled.nav`
     text-transform: uppercase;
     cursor: pointer;
     transition: 0.3s ease;
+
+    &:nth-of-type(2) {
+      margin-left: auto;
+    }
+
+    &:nth-of-type(3) {
+      margin-right: 3em;
+      margin-left: 3em;
+    }
 
     &:hover {
       border-bottom: 4px solid #FF8449;
